@@ -1,9 +1,0 @@
-install express
-install nodemon
-install dotenv
-install mongoose
-install bcryptjs
-install jsonwebtoken
-install express-validator 
-
-  
