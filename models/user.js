@@ -1,3 +1,4 @@
+// ユーザーデータをモデル化する関数
 const modelUser = (userData) => {
 
   console.log('creating user', userData);
@@ -5,6 +6,7 @@ const modelUser = (userData) => {
 
 }
 
+// メールアドレスからユーザーを検索する関数
 const findUserByEmail = (email) => {
 
   console.log('finding user by email', email);
@@ -15,9 +17,3 @@ module.exports = {
   createUser,
   findUserByEmail,
 }
-
-#これより下を削除してかくの始める
-what i want to do is
-Cursorで書いてもらったものがUdemyと自分ので違うから
-現在差分を確認
-
