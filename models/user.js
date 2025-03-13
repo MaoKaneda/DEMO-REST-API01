@@ -7,6 +7,7 @@ const modelUser = (userData) => {
 }
 
 // メールアドレスからユーザーを検索する関数
+//今からテスト
 const findUserByEmail = (email) => {
 
   console.log('finding user by email', email);
