@@ -1,8 +1,11 @@
-// 一時的なユーザーデータ保存用の配列
+// データの一時保存用
+// 本番環境ではデータベースを使用する
 const users = [];
 
+// ユーザー登録処理
 export const signup = (req, res) => {
   try {
+    // リクエストボディからユーザー情報を取得
     const { email, password, username } = req.body;
     
     // 必須項目の入力チェック
@@ -20,17 +23,18 @@ export const signup = (req, res) => {
       });
     }
 
-    // 新規ユーザーデータの作成
+    // 新規ユーザーデータの作成と保存
     const newUser = {
       email,
-      password,
+      password, // 本番環境ではハッシュ化が必要
       username,
       createdAt: new Date()
     };
 
+    // 配列にユーザーを追加
     users.push(newUser);
 
-    // 登録成功レスポンス
+    // 登録成功レスポンスの送信
     res.status(201).json({
       message: 'ユーザー登録が完了しました',
       user: {
@@ -40,15 +44,17 @@ export const signup = (req, res) => {
     });
 
   } catch (error) {
-    // エラー発生時の処理
+    // エラー発生時のエラーレスポンス送信
     res.status(500).json({ 
       message: 'サーバーエラーが発生しました' 
     });
   }
 };
 
+// ユーザーログイン処理
 export const login = (req, res) => {
   try {
+    // リクエストボディからログイン情報を取得
     const { email, password } = req.body;
 
     // 必須項目の入力チェック
@@ -58,7 +64,7 @@ export const login = (req, res) => {
       });
     }
 
-    // ユーザー認証
+    // ユーザー認証（メールアドレスとパスワードの検証）
     const user = users.find(u => u.email === email && u.password === password);
     if (!user) {
       return res.status(401).json({ 
@@ -66,7 +72,7 @@ export const login = (req, res) => {
       });
     }
 
-    // ログイン成功レスポンス
+    // ログイン成功レスポンスの送信
     res.status(200).json({
       message: 'ログインに成功しました',
       user: {
@@ -76,7 +82,7 @@ export const login = (req, res) => {
     });
 
   } catch (error) {
-    // エラー発生時の処理
+    // エラー発生時のエラーレスポンス送信
     res.status(500).json({ 
       message: 'サーバーエラーが発生しました' 
     });
